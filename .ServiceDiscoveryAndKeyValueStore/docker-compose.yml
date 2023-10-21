@@ -1,0 +1,79 @@
+version: '3.7'
+
+services:
+  
+  consul-server1:
+    image: hashicorp/consul:1.16.2
+    container_name: consul-server1
+    restart: always
+    volumes:
+     - ./server1.json:/consul/config/server1.json:ro
+     - ./certs/:/consul/config/certs/:ro
+    networks:
+      - consul
+    ports:
+      - "50001:8300"
+      - "50002:8301"
+      - "50003:8302"
+      - "50004:8400"
+      - "50005:8500"
+      - "50006:8600"
+    command: "agent -bootstrap-expect=3"
+
+  consul-server2:
+    image: hashicorp/consul:1.16.2
+    container_name: consul-server2
+    restart: always
+    volumes:
+     - ./server2.json:/consul/config/server2.json:ro
+     - ./certs/:/consul/config/certs/:ro
+    networks:
+      - consul
+    ports:
+      - "50007:8300"
+      - "50008:8301"
+      - "50009:8302"
+      - "50010:8400"
+      - "50011:8500"
+      - "50012:8600"
+    command: "agent -bootstrap-expect=3"
+
+  consul-server3:
+    image: hashicorp/consul:1.16.2
+    container_name: consul-server3
+    restart: always
+    volumes:
+     - ./server3.json:/consul/config/server3.json:ro
+     - ./certs/:/consul/config/certs/:ro
+    networks:
+      - consul
+    ports:
+      - "50013:8300"
+      - "50014:8301"
+      - "50015:8302"
+      - "50016:8400"
+      - "50017:8500"
+      - "50018:8600"
+    command: "agent -bootstrap-expect=3"
+
+  consul-client:
+    image: hashicorp/consul:1.16.2
+    container_name: consul-client
+    restart: always
+    volumes:
+     - ./client.json:/consul/config/client.json:ro
+     - ./certs/:/consul/config/certs/:ro
+    networks:
+      - consul
+    ports:
+      - "50019:8300"
+      - "50020:8301"
+      - "50021:8302"
+      - "50022:8400"
+      - "50023:8500"
+      - "50024:8600"
+    command: "agent"
+
+networks:
+  consul:
+    driver: bridge

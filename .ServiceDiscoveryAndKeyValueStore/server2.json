@@ -1,0 +1,26 @@
+{
+  "node_name": "consul-server2",
+  "datacenter": "dc11",
+  "server": true,
+  "ui_config": {
+    "enabled": true
+  },
+  "data_dir": "/consul/data",
+  "addresses": {
+    "http": "0.0.0.0"
+  },
+  "retry_join": [ "consul-server1", "consul-server3" ],
+  "encrypt": "aPuGh+5UDskRAbkLaXRzFoSOcSM+5vAK+NEYOWHJH7w=",
+  "tls": {
+    "defaults": {
+      "ca_file": "/consul/config/certs/ca.pem",
+      "cert_file": "/consul/config/certs/cert.pem",
+      "key_file": "/consul/config/certs/cert-key.pem",
+      "verify_incoming": true,
+      "verify_outgoing": true
+    },
+    "internal_rpc": {
+      "verify_server_hostname": true
+    }
+  }
+}
